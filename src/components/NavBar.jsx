@@ -1,18 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-    return (
-        <div>
-            <ul id="nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact</a></li>
-                <input type="text" placeholder="search"></input>
-                <button>Search</button>
-            </ul>
-        </div>
-    )
-}
+  return (
+    <div>
+      <nav id="nav">
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/Register">Register</Link>
+      </nav>
+    </div>
+  );
+};
 
 export default NavBar;
