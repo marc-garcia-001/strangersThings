@@ -10,6 +10,7 @@ import {
 
 import { NavBar, Home, Login, Register, Posts } from "./components";
 
+
 const App = () => {
   return (
     <div id="App">
@@ -25,6 +26,7 @@ const App = () => {
           <Home />
         </Route>
       </Switch>
+    <Posts />
     </div>
   );
 };
