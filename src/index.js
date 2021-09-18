@@ -4,17 +4,27 @@ import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
   Route,
-  Switch, 
-  Redirect
+  Switch,
+  Redirect,
 } from "react-router-dom";
 
-import { Header } from "./components";
+import { NavBar, Home, Login, Register, Posts } from "./components";
 
 const App = () => {
   return (
     <div id="App">
-      <h1>Hello, World!!!!</h1>
-      <Header />
+      <NavBar />
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 };
