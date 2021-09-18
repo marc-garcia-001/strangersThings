@@ -8,16 +8,13 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { NavBar, Home, About, Login, Register } from "./components";
+import { NavBar, Home, Login, Register, Posts } from "./components";
 
 const App = () => {
   return (
     <div id="App">
       <NavBar />
       <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
         <Route path="/login">
           <Login />
         </Route>
