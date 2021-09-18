@@ -8,13 +8,15 @@ import {
   Redirect
 } from "react-router-dom";
 
-import { Header } from "./components";
+import { Posts } from './components';
+import { NavBar } from './components';
 
 const App = () => {
   return (
     <div id="App">
       <h1>Hello, World!!!!</h1>
-      <Header />
+      <NavBar />
+      <Posts />
     </div>
   );
 };

@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-const BASE = 'https://jsonplace-univclone.herokuapp.com'
+export const BASE = 'https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT/'
 
-export async function getUsers() {
+export async function getPosts(afterUrl) {
   try {
-    const { data } = await axios.get(`${ BASE }/users`);
+    const response = await axios.get(`${BASE}/${afterUrl}`)
+    // console.log(response)
+    const data = await response.data;
     return data;
-  } catch (error) {
-    throw error;
+  } catch (err) { 
+    console.log(err);
   }
 }
-
