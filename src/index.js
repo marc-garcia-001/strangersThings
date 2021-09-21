@@ -10,7 +10,6 @@ import {
 
 import { NavBar, Home, Login, Register, Posts } from "./components";
 
-
 const App = () => {
   return (
     <div id="App">
@@ -22,11 +21,13 @@ const App = () => {
         <Route path="/register">
           <Register />
         </Route>
+        <Route path="/posts">
+          <Posts />
+        </Route>
         <Route path="/">
           <Home />
         </Route>
       </Switch>
-    <Posts />
     </div>
   );
 };
