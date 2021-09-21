@@ -10,6 +10,7 @@ const Posts = () => {
   const [description, setDescription] = useState([]);
   const [price, setPrice] = useState(0);
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("title, description: ", title, description, price);
