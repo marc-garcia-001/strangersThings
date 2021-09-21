@@ -12,15 +12,29 @@ import { NavBar, Home, Login, Register, Posts } from "./components";
 
 
 const App = () => {
+  const [token, setToken] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log('isLoggedIn', isLoggedIn);
   return (
     <div id="App">
       <NavBar />
       <Switch>
         <Route path="/login">
-          <Login />
+          <Login 
+            isLoggedIn={ isLoggedIn }
+            setIsLoading={ setIsLoading } 
+            setIsLoggedIn={ setIsLoggedIn } 
+            setToken={ setToken }
+          />
         </Route>
         <Route path="/register">
-          <Register />
+          <Register 
+            isLoggedIn={ isLoggedIn }
+            setIsLoading={ setIsLoading } 
+            setIsLoggedIn={ setIsLoggedIn } 
+            setToken={ setToken }
+          />
         </Route>
         <Route path="/">
           <Home />

@@ -1,16 +1,82 @@
 import React, { useState } from "react";
+import { registerUser } from "../api";
+import { storeToken } from "../auth";
 
-const Register = () => {
+const Register = ({ isLoggedIn, setIsLoading, setIsLoggedIn, setToken }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
-  //   import { registerUser } from "../api";
-  // import { storeToken } from "../auth";
-
+  console.log(isLoggedIn);
   return (
     <div className="register-main-container">
-      <form
+      {isLoggedIn ? (
+        <>
+          <h1>Welcome</h1>
+          <button
+            className="logoutButton"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsLoggedIn(false);
+              clearCurrentUser();
+              setToken("");
+            }}
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <form
+          id="register"
+          onSubmit={async (event) => {
+            event.preventDefault();
+            setIsLoading(true);
+
+            try {
+              const results = await registerUser(userName, password);
+              storeToken(results.data.token);
+              setToken(results.data.token);
+              setIsLoggedIn(true);
+              setUserName("");
+              setPassword("");
+            } catch (err) {
+              console.log(err);
+            } finally {
+              setIsLoading(false);
+            }
+          }}
+        >
+          <fieldset>
+            <label htmlFor="userName">User Name</label>
+            <input
+              type="text"
+              placeholder="User Name"
+              min="8"
+              id="userName"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value);
+              }}
+            />
+          </fieldset>
+
+          <fieldset>
+            <label htmlFor="password">Password</label>
+            <input
+              type="text"
+              placeholder="Password"
+              id="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </fieldset>
+
+          <button>Register</button>
+        </form>
+      )}
+      {/* <form
         id="register"
+
         onSubmit={async (event) => {
           event.preventDefault();
           setIsLoading(true);
@@ -18,8 +84,8 @@ const Register = () => {
           try {
             const results = await registerUser(userName, password);
             storeToken(results.data.token);
+            setToken(results.data.token);
             setIsLoggedIn(true);
-
             setUserName("");
             setPassword("");
           } catch (err) {
@@ -37,6 +103,9 @@ const Register = () => {
             min="8"
             id="userName"
             value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
           />
         </fieldset>
 
@@ -47,11 +116,14 @@ const Register = () => {
             placeholder="Password"
             id="password"
             value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
         </fieldset>
 
         <button>Register</button>
-      </form>
+      </form> */}
     </div>
   );
 };
