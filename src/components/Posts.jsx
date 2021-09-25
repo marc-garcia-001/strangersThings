@@ -51,25 +51,30 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="posts-main-container">
-      <NewPost posts={posts} setPosts={setPosts} />
-
+    <div id="posts-main-container">
       <h1>Posts</h1>
-      {posts.length
-        ? posts.map((post) => {
-            return (
-              <div key={post._id} className="post-card">
-                <h3>{post.title}</h3>
-                <p>{post.description}</p>
-                {post.isAuthor ? (
-                  <button onClick={() => handleDelete(post._id)}>Delete</button>
-                ) : (
-                  <button>Message</button>
-                )}
-              </div>
-            );
-          })
-        : null}
+      <div id="create-new-post-container">
+        <NewPost posts={posts} setPosts={setPosts} />
+      </div>
+      <div id="grid-container">
+        {posts.length
+          ? posts.map((post, index) => {
+              return (
+                <div key={post._id} className="post-card">
+                  <h3>{post.title}</h3>
+                  <p>{post.description}</p>
+                  {post.isAuthor ? (
+                    <button onClick={() => handleDelete(post._id)}>
+                      Delete
+                    </button>
+                  ) : (
+                    <button>Message</button>
+                  )}
+                </div>
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 };

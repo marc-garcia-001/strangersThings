@@ -3,6 +3,10 @@ import React, { useState, useEffect } from "react";
 import { getToken } from "../auth";
 import { createNewPost } from "../api";
 
+
+
+
+
 const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
 const NewPost = ({posts, setPosts}) => {
@@ -24,21 +28,25 @@ const NewPost = ({posts, setPosts}) => {
 
   return (
     <>
-      <h3>Create New Post</h3>
+      
       <form onSubmit={handleSubmit}>
+      <h3>Create New Post</h3>
         <input
+          id="cnp-title"
           type="text"
           placeholder="Title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         ></input>
         <input
+        id="cnp-description"
           type="text"
           placeholder="Description"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
         <input
+          id="cnp-value"
           type="text"
           placeholder="$$$"
           value={price}

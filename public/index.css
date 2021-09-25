@@ -1,13 +1,33 @@
+/* Master Colors: 
+
+#ccc
+#069
+#333
+darkblue
+
+*/
+
+/* Master Styles */
+
+* {
+  box-sizing: border-box;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+}
+
+/* Start Nav-Bar */
+
 #nav {
   width: 100%;
   float: left;
   margin: 0 0 3em 0;
   padding: 0;
   list-style: none;
-}
-
-#nav li {
-  float: left;
+  border: 2px solid #333;
 }
 
 #nav {
@@ -16,9 +36,7 @@
   margin: 0 0 3em 0;
   padding: 0;
   list-style: none;
-  background-color: #f2f2f2;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #ccc;
+  background-color: #ccc;
 }
 
 #nav li a {
@@ -39,10 +57,97 @@
   display: block;
 }
 
-#nav button {
+#nav a {
   float: right;
   padding: 8px 15px;
   font-weight: bold;
   color: #069;
   border: 1px solid #ccc;
 }
+
+/* End Nav-Bar */
+
+/* Start H3 */
+
+#posts-main-container h1 {
+  text-align: center;
+  color: #069;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/* End H3 */
+
+/* Start Create New Post */
+
+#create-new-post-container h3 {
+  color: #069;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 11px;
+}
+
+#create-new-post-container form {
+  border: 2px solid #333;
+  background-color: #ccc;
+}
+
+#create-new-post-container form input {
+  display: block;
+  margin: 1em;
+}
+
+#create-new-post-container form #cnp-title {
+  border: solid 2px #333;
+  width: 20em;
+}
+
+#create-new-post-container form #cnp-description {
+  border: solid 2px #333;
+  width: 40em;
+  height: 100px;
+}
+
+#create-new-post-container form #cnp-value {
+  border: solid 2px #333;
+  width: 5em;
+}
+
+#create-new-post-container form button {
+  background-color: #069;
+  color: white;
+  height: 40px;
+  border: 2px solid darkblue;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.52);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.52);
+  margin-left: 11px;
+  margin-bottom: 11px;
+}
+
+/* End Create New Post */
+
+/* Start Posts */
+
+#grid-container .post-card {
+  background-color: #ccc;
+  margin-top: 1em;
+  border: 2px solid #333;
+  padding: 10px;
+}
+
+#grid-container .post-card h3 {
+  border-bottom: 2px dotted black;
+  color: #069;
+  padding-bottom: 1em;
+}
+
+#grid-container .post-card button {
+  background-color: #069;
+  color: white;
+  height: 40px;
+  border: 2px solid darkblue;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.52);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.52);
+}
+
+/* End Posts */
