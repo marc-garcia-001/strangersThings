@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = ({ isLoggedIn }) => {
   return (
-    <div>
+    
       <nav id="nav">
         <Link to="/">Home</Link>
         <Link to="Posts">Posts</Link>
@@ -13,7 +13,7 @@ const NavBar = ({ isLoggedIn }) => {
           ? <Link to="/Profile">Profile</Link> : null}
         <Link to="/MessageForm">Message Form</Link>
       </nav>
-    </div>
+    
   );
 };
 

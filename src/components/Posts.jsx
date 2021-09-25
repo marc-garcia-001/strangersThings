@@ -9,6 +9,14 @@ const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function postMatches(post, text) {
+    return post.description.includes(text) || post.title.includes(text);
+  }
+
+  const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
+  const postsToDisplay = searchTerm.length ? filteredPosts : posts;
 
   const handleDelete = async (_id) => {
     try {
@@ -62,12 +70,20 @@ const Posts = () => {
   return (
     <div id="posts-main-container">
       <h1>Posts</h1>
+      <input
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+        value={searchTerm}
+        type="text"
+        placeholder="Search"
+      />
       <div id="create-new-post-container">
         <NewPost posts={posts} setPosts={setPosts} />
       </div>
       <div id="grid-container">
-        {posts.length
-          ? posts.reverse().map((post, index) => {  
+        {postsToDisplay.length
+          ? postsToDisplay.map((post, index) => {
               return (
                 <div key={post._id} className="post-card">
                   <h3>{post.title}</h3>
