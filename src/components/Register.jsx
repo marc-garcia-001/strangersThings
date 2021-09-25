@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { registerUser } from "../api";
-import { storeToken } from "../auth";
+import { storeToken, clearCurrentUser } from "../auth";
 
 const Register = ({ isLoggedIn, setIsLoading, setIsLoggedIn, setToken }) => {
   const [userName, setUserName] = useState("");

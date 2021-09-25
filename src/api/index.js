@@ -33,3 +33,19 @@ export async function loginUser(username, password) {
     console.log(err);
   }
 }
+
+export async function getCurrentUser (userToken) {
+  const header = {
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${ userToken }`
+    }
+  }
+
+  try {
+    const { data } = await axios.get(`${ BASE }/users/me`, header);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
