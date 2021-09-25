@@ -8,7 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { NavBar, Home, Login, Register, Posts } from "./components";
+import { NavBar, Home, Login, Register, Posts, MessageForm } from "./components";
 
 const App = () => {
   const [token, setToken] = useState('');
@@ -37,6 +37,9 @@ const App = () => {
         </Route>
         <Route path="/posts">
           <Posts />
+        </Route>
+        <Route path="/MessageForm">
+          <MessageForm />
         </Route>
         <Route path="/">
           <Home />
