@@ -9,6 +9,17 @@ const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const [searchTermm, setSearchTerm] = useState('');
+
+  function postMatches(post, text) {
+
+    
+
+  };
+
+  const filteredPosts = posts.filter(post => postMatches(post, searchTerm));
+  const postsToDisplay = searchTerm.length ? filteredPosts : posts;
+
 
   const handleDelete = async (_id) => {
     try {
