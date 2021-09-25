@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { getCurrentUser } from "./api";
 
+
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
+  
 } from "react-router-dom";
 
 import { NavBar, Home, Login, Register, Posts, MessageForm, Profile } from "./components";
@@ -47,9 +49,10 @@ const App = () => {
           <Posts />
         </Route>
         <Route>
-          <Profile 
+          <Profile>  
             token={ token }
-          />
+          </Profile>
+          </Route>
         <Route path="/MessageForm">
           <MessageForm />
         </Route>
