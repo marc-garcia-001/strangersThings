@@ -46,10 +46,11 @@ const App = () => {
         <Route path="/posts">
           <Posts />
         </Route>
-        <Route>
+        <Route path='/profile'>
           <Profile 
             token={ token }
           />
+        </Route>
         <Route path="/MessageForm">
           <MessageForm />
         </Route>

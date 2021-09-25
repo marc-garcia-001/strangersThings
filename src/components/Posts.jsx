@@ -56,8 +56,7 @@ const Posts = () => {
 
       <h1>Posts</h1>
       {posts.length
-        ? posts.map((post, index) => {
-            console.log(post);
+        ? posts.map((post) => {
             return (
               <div key={post._id} className="post-card">
                 <h3>{post.title}</h3>

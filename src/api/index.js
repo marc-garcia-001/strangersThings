@@ -49,3 +49,27 @@ export async function getCurrentUser (userToken) {
     console.log(err);
   }
 }
+
+export async function createNewPost(userToken, title, description, price, willDeliver) {
+  const header = {
+    headers: {
+      "Content-type": "application/json",
+      "Authorization": `Bearer ${ userToken }`
+    }
+  }
+  const body = {
+    post: {
+      title: title,
+      description: description,
+      price: price,
+      willDeliver: willDeliver
+    }
+  }
+
+  try {
+    const { data } = await axios.post(`${ BASE }/posts`, header, body);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}

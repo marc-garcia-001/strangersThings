@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Redirect } from "react-router";
 import { loginUser, getCurrentUser } from "../api";
 import { storeToken, clearCurrentUser } from "../auth";
+import { useHistory } from "react-router-dom";
 
 const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, token, setToken, currentUser, setCurrentUser }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
+  let history = useHistory();
   return (
     <div className="login-main-container">
       {isLoggedIn ? (
@@ -39,7 +40,7 @@ const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, token, setToken, curre
               storeToken(results.data.token);
               setToken(results.data.token);
               setIsLoggedIn(true);
-              
+              history.push('/profile')
             } catch (error) {
               console.log(error);
             } finally {

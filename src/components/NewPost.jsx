@@ -1,41 +1,24 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { getToken } from "../auth";
+import { createNewPost } from "../api";
 
 const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
 const NewPost = ({posts, setPosts}) => {
   const [title, setTitle] = useState([]);
   const [description, setDescription] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
+  const [willDeliver, setWillDeliver] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("title, description: ", title, description, price);
-
+    const token = getToken();
     try {
-      const response = await axios.post(
-        `${BASE}/posts`,
-
-        {
-          post: {
-            title: title,
-            description: description,
-            price: "1",
-          },
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTQ2NGE4NmEyYThiMjAwMTc2OWE2ODkiLCJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWF0IjoxNjMyMTg5ODg0fQ.8NPMlNII7GXTvwOXU7p1Igav86AL_9fys8lVDo1WenU",
-          },
-        }
-      );
-      const newPost = response.data.data.post;
-      const allPosts = [newPost, ...posts];
-      setPosts(allPosts);
-    } catch (error) {
-      console.log(error);
+      const data = await createNewPost(token, title, description, price, willDeliver);
+    } catch (err) {
+      console.log(err);
     }
   };
 
