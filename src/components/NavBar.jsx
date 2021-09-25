@@ -11,6 +11,7 @@ const NavBar = ({ isLoggedIn }) => {
         <Link to="/Register">Register</Link>
         { isLoggedIn
           ? <Link to="/Profile">Profile</Link> : null}
+        <Link to="/MessageForm">Message Form</Link>
       </nav>
     </div>
   );

@@ -9,7 +9,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { NavBar, Home, Login, Register, Posts, Profile } from "./components";
+import { NavBar, Home, Login, Register, Posts, MessageForm, Profile } from "./components";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState([]);
@@ -50,6 +50,8 @@ const App = () => {
           <Profile 
             token={ token }
           />
+        <Route path="/MessageForm">
+          <MessageForm />
         </Route>
         <Route path="/">
           <Home />
