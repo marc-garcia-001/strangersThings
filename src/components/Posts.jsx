@@ -1,44 +1,34 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { NewPost } from ".";
 import { getPosts } from "../api";
+import EditPost from "./MessageForm";
+import { getToken } from "../auth";
 
 const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState([]);
-  const [description, setDescription] = useState([]);
-  const [price, setPrice] = useState(0);
 
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("title, description: ", title, description, price);
-
+  const handleDelete = async (_id) => {
     try {
-      const response = await axios.post(
-        `${BASE}/posts`,
+      const myToken = getToken();
 
-        {
-          post: {
-            title: title,
-            description: description,
-            price: "1",
-          },
+      await axios.delete(`${BASE}/posts/${_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${myToken}`,
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTQ2NGE4NmEyYThiMjAwMTc2OWE2ODkiLCJ1c2VybmFtZSI6InVzZXJuYW1lIiwiaWF0IjoxNjMyMTg5ODg0fQ.8NPMlNII7GXTvwOXU7p1Igav86AL_9fys8lVDo1WenU",
-          },
-        }
-      );
-      const newPost = response.data.data.post;
-      const allPosts = [newPost, ...posts];
-      setPosts(allPosts);
+      });
 
-      
+      const remainingPosts = posts.filter((e) => {
+        if (_id === e._id) {
+          return false;
+        } else {
+          return true;
+        }
+      });
+      setPosts(remainingPosts);
     } catch (error) {
       console.log(error);
     }
@@ -62,36 +52,21 @@ const Posts = () => {
 
   return (
     <div className="posts-main-container">
-      <h3>Create New Post</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-        ></input>
-        <input
-          type="text"
-          placeholder="Description"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="$$$"
-          value={price}
-          onChange={(event) => setPrice(event.target.value)}
-        />
-        <button>Submit</button>
-      </form>
+      <NewPost posts={posts} setPosts={setPosts} />
 
       <h1>Posts</h1>
       {posts.length
-        ? posts.map((post) => {
+        ? posts.map((post, index) => {
+            console.log(post);
             return (
               <div key={post._id} className="post-card">
                 <h3>{post.title}</h3>
                 <p>{post.description}</p>
+                {post.isAuthor ? (
+                  <button onClick={() => handleDelete(post._id)}>Delete</button>
+                ) : (
+                  <button>Message</button>
+                )}
               </div>
             );
           })
