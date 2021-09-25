@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { getCurrentUser } from "./api";
-
+import { getToken } from "./auth";
 
 import {
   BrowserRouter as Router,
@@ -18,6 +18,12 @@ const App = () => {
   const [token, setToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (getToken()) {
+      setIsLoggedIn(true);
+    }
+  })
 
   return (
     <div id="App">

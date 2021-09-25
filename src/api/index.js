@@ -54,7 +54,7 @@ export async function createNewPost(userToken, title, description, price, willDe
   const header = {
     headers: {
       "Content-type": "application/json",
-      "Authorization": `Bearer ${ userToken }`
+      Authorization: `Bearer ${ userToken }`
     }
   }
   const body = {
@@ -67,7 +67,7 @@ export async function createNewPost(userToken, title, description, price, willDe
   }
 
   try {
-    const { data } = await axios.post(`${ BASE }/posts`, header, body);
+    const { data } = await axios.post(`${ BASE }/posts`, body, header);
     return data;
   } catch (err) {
     console.log(err);

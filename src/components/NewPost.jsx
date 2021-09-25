@@ -1,13 +1,7 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { getToken } from "../auth";
 import { createNewPost } from "../api";
 
-
-
-
-
-const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
 const NewPost = ({posts, setPosts}) => {
   const [title, setTitle] = useState([]);
@@ -17,10 +11,11 @@ const NewPost = ({posts, setPosts}) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("title, description: ", title, description, price);
     const token = getToken();
     try {
-      const data = await createNewPost(token, title, description, price, willDeliver);
+      const {data} = await createNewPost(token, title, description, price, willDeliver);
+      setPosts([...posts.reverse() ,data.post])
+      return data;
     } catch (err) {
       console.log(err);
     }
@@ -52,6 +47,19 @@ const NewPost = ({posts, setPosts}) => {
           value={price}
           onChange={(event) => setPrice(event.target.value)}
         />
+        <label id='cnp-deliver-label'>
+          Willing to Deliver?
+          <input 
+            id="cnp-deliver"
+            name='willDeliver' 
+            type="checkbox" 
+            checked={ willDeliver }
+            onChange={() => {
+              setWillDeliver(!willDeliver);
+            }}
+          />
+        </label>
+
         <button>Submit</button>
       </form>
     </>

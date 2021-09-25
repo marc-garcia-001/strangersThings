@@ -27,8 +27,6 @@ const Profile = ({ token }) => {
   const posts = userData.posts;
   const messages = userData.messages;
 
-  console.log("hello", userData);
-
   return (
     <div className="profile_container">
       <h3>Welcome {userData.username}!</h3>
@@ -47,19 +45,18 @@ const Profile = ({ token }) => {
           : null}
       </div>
       <div className="message-history_container">
-          <h4>Message History</h4>
-          {messages
-            ? messages.map((message) => {
-                return (
-                    <div key={message._id} className="message-card">
-                        <h3>Message from { message.fromUser.username }</h3>
-                        <p>{ message.content }</p>
-                        <button>Message back</button>
-                    </div>
-                )
-            }) : null
-
-          }
+        <h4>Message History</h4>
+        {messages
+          ? messages.map((message) => {
+              return (
+                <div key={message._id} className="message-card">
+                  <h3>Message from {message.fromUser.username}</h3>
+                  <p>{message.content}</p>
+                  <button>Message back</button>
+                </div>
+              );
+            })
+          : null}
       </div>
     </div>
   );

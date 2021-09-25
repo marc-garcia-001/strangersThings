@@ -35,8 +35,17 @@ const Posts = () => {
   };
 
   async function fetchAllPosts() {
+    const myToken = getToken();
     try {
-      const { data } = await axios.get(`${BASE}/posts`);
+      const header = {
+        headers: {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${ myToken }`
+          }
+        }
+      }
+      const { data } = await axios.get(`${BASE}/posts`, header);
 
       setPosts(data.data.posts);
 
@@ -58,7 +67,7 @@ const Posts = () => {
       </div>
       <div id="grid-container">
         {posts.length
-          ? posts.map((post, index) => {
+          ? posts.reverse().map((post, index) => {  
               return (
                 <div key={post._id} className="post-card">
                   <h3>{post.title}</h3>
