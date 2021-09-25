@@ -54,12 +54,11 @@ const Posts = () => {
     <div id="posts-main-container">
       <h1>Posts</h1>
       <div id="create-new-post-container">
-      <NewPost posts={posts} setPosts={setPosts} />
+        <NewPost posts={posts} setPosts={setPosts} />
       </div>
       <div id="grid-container">
         {posts.length
           ? posts.map((post, index) => {
-              console.log(post);
               return (
                 <div key={post._id} className="post-card">
                   <h3>{post.title}</h3>
