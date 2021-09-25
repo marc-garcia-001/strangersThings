@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
-import { loginUser } from "../api";
+import { Redirect } from "react-router";
+import { loginUser, getCurrentUser } from "../api";
 import { storeToken, clearCurrentUser } from "../auth";
 
-const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, setToken }) => {
+const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, token, setToken, currentUser, setCurrentUser }) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,7 +11,7 @@ const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, setToken }) => {
     <div className="login-main-container">
       {isLoggedIn ? (
         <>
-          <h1>Welcome Back!</h1>
+          <h1>Welcome Back { userName }!</h1>
           <button
             className="logoutButton"
             onClick={(e) => {
@@ -19,6 +19,8 @@ const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, setToken }) => {
               setIsLoggedIn(false);
               clearCurrentUser();
               setToken("");
+              setUserName("");
+              setPassword("");
             }}
           >
             Logout
@@ -37,9 +39,7 @@ const Login = ({ isLoggedIn, setIsLoading, setIsLoggedIn, setToken }) => {
               storeToken(results.data.token);
               setToken(results.data.token);
               setIsLoggedIn(true);
-
-              setUserName("");
-              setPassword("");
+              
             } catch (error) {
               console.log(error);
             } finally {

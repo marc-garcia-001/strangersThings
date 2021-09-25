@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import { getCurrentUser } from "./api";
 
 import {
   BrowserRouter as Router,
@@ -8,23 +9,27 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import { NavBar, Home, Login, Register, Posts, MessageForm } from "./components";
+import { NavBar, Home, Login, Register, Posts, MessageForm, Profile } from "./components";
 
 const App = () => {
+  const [currentUser, setCurrentUser] = useState([]);
   const [token, setToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log('isLoggedIn', isLoggedIn);
+
   return (
     <div id="App">
-      <NavBar />
+      <NavBar isLoggedIn={isLoggedIn} />
       <Switch>
         <Route path="/login">
           <Login 
             isLoggedIn={ isLoggedIn }
             setIsLoading={ setIsLoading } 
             setIsLoggedIn={ setIsLoggedIn } 
+            token={ token }
             setToken={ setToken }
+            currentUser={ currentUser } 
+            setCurrentUser={ setCurrentUser }
           />
         </Route>
         <Route path="/register">
@@ -32,12 +37,19 @@ const App = () => {
             isLoggedIn={ isLoggedIn }
             setIsLoading={ setIsLoading } 
             setIsLoggedIn={ setIsLoggedIn } 
+            token={ token }
             setToken={ setToken }
+            currentUser={ currentUser } 
+            setCurrentUser={ setCurrentUser }
           />
         </Route>
         <Route path="/posts">
           <Posts />
         </Route>
+        <Route>
+          <Profile 
+            token={ token }
+          />
         <Route path="/MessageForm">
           <MessageForm />
         </Route>
