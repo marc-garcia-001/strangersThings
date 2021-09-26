@@ -18,6 +18,8 @@ const App = () => {
   const [token, setToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [messageTarget, setMessageTarget] = useState('');
+  const [postIDforMessage, setPostIDforMessage] = useState('');
 
   useEffect(() => {
     if (getToken()) {
@@ -52,15 +54,24 @@ const App = () => {
           />
         </Route>
         <Route path="/posts">
-          <Posts />
+          <Posts 
+            messageTarget={ messageTarget }
+            setMessageTarget={ setMessageTarget }
+            setPostIDforMessage={ setPostIDforMessage }
+          />
         </Route>
         <Route path='/profile'>
           <Profile 
             token={ token }
+            messageTarget={ messageTarget }
+            setMessageTarget={ setMessageTarget }
           />
         </Route>
         <Route path="/MessageForm">
-          <MessageForm />
+          <MessageForm 
+            messageTarget={ messageTarget }
+            postIDforMessage={ postIDforMessage }
+          />
         </Route>
         <Route path="/">
           <Home />
