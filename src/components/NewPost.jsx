@@ -14,7 +14,7 @@ const NewPost = ({posts, setPosts}) => {
     const token = getToken();
     try {
       const {data} = await createNewPost(token, title, description, price, willDeliver);
-      setPosts([...posts.reverse() ,data.post])
+      setPosts([...posts.reverse(), data.post])
       return data;
     } catch (err) {
       console.log(err);

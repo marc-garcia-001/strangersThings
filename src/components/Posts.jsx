@@ -4,15 +4,16 @@ import { NewPost } from ".";
 import { getPosts } from "../api";
 import EditPost from "./MessageForm";
 import { getToken } from "../auth";
+import { useHistory } from "react-router-dom";
 
 const BASE = "https://strangers-things.herokuapp.com/api/2106-CPU-RM-WEB-PT";
 
-const Posts = () => {
+const Posts = ({ messageTarget, setMessageTarget, setPostIDforMessage }) => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  let history = useHistory();
   function postMatches(post, text) {
-    return post.description.includes(text) || post.title.includes(text);
+    return post.description.toLowerCase().includes(text.toLowerCase()) || post.title.toLowerCase().includes(text.toLowerCase());
   }
 
   const filteredPosts = posts.filter((post) => postMatches(post, searchTerm));
@@ -83,7 +84,8 @@ const Posts = () => {
       </div>
       <div id="grid-container">
         {postsToDisplay.length
-          ? postsToDisplay.map((post, index) => {
+          ? postsToDisplay.reverse().map((post) => {
+            console.log(post)
               return (
                 <div key={post._id} className="post-card">
                   <h3>{post.title}</h3>
@@ -93,7 +95,15 @@ const Posts = () => {
                       Delete
                     </button>
                   ) : (
-                    <button>Message</button>
+                    <button 
+                      value={ post.author.username }
+                      key={ post._id }
+                      onClick={e => {
+                        setMessageTarget(e.target.value);
+                        setPostIDforMessage(e.target.key);
+                        history.push('/MessageForm')
+                      }}
+                    >Message</button>
                   )}
                 </div>
               );

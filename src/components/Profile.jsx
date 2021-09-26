@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BASE } from "../api";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
-const Profile = ({ token }) => {
+const Profile = ({ token, messageTarget, setMessageTarget }) => {
   const [userData, setUserData] = useState([]);
   async function getCurrentUserData(userToken) {
     const header = {
@@ -20,17 +21,19 @@ const Profile = ({ token }) => {
       console.log(err);
     }
   }
+
   useEffect(() => {
     getCurrentUserData(token);
   }, []);
 
   const posts = userData.posts;
   const messages = userData.messages;
+  let history = useHistory();
 
   return (
     <div className="profile_container">
       <h3>Welcome {userData.username}!</h3>
-      <div className="post-history_container">
+      <div id='grid-container' className="post-history_container">
         <h4>Post History</h4>
         {posts
           ? posts.map((post) => {
@@ -38,7 +41,6 @@ const Profile = ({ token }) => {
                 <div key={post._id} className="post-card">
                   <h3>{post.title}</h3>
                   <p>{post.description}</p>
-                  <button>Delete</button>
                 </div>
               );
             })
@@ -52,7 +54,7 @@ const Profile = ({ token }) => {
                 <div key={message._id} className="message-card">
                   <h3>Message from {message.fromUser.username}</h3>
                   <p>{message.content}</p>
-                  <button>Message back</button>
+                  <p>Original Post title: {message.post.title}</p>
                 </div>
               );
             })
