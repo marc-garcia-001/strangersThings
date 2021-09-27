@@ -4,56 +4,62 @@ import axios from "axios";
 import { BASE } from "../api";
 
 const MessageForm = ({ messageTarget, postIDforMessage }) => {
-	const [messageTitle, setMessageTitle] = useState('');
-	const [messageContent, setMessageContent] = useState('');
+  const [messageTitle, setMessageTitle] = useState("");
+  const [messageContent, setMessageContent] = useState("");
 
-	async function postMessage(post_ID, content) {
-		const myToken = getToken();
-		const header = {
-			headers: {
-				'Content-type': 'application/json',
-				'Authorization': `Bearer ${ myToken }`
-			}
-		}
-		const body = {
-			message: {
-				content: content
-			}
-		}
+  async function postMessage(post_ID, content) {
+    const myToken = getToken();
+    const header = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${myToken}`,
+      },
+    };
+    const body = {
+      message: {
+        content: content,
+      },
+    };
 
-		try {
-			const {data} = await axios.post(`${ BASE }/posts/${ post_ID }/messages`)
-			return data
-		} catch (err){
-			console.log(err);
-		}
-	}
- 
-  return (
+    try {
+      const { data } = await axios.post(`${BASE}/posts/${post_ID}/messages`);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  return !getToken() ? (
     <div className="message-form_container">
-      <h3>Message { messageTarget }</h3>
+      You must be logged in to message!
+    </div>
+  ) : (
+    <div className="message-form_container">
+      <h3>Message {messageTarget}</h3>
       <form>
-        <input 
-			type="text" 
-			placeholder="Title" 
-			value={ messageTitle }
-			onChange={(e) =>{
-				setMessageTitle(e.target.value);
-			}}
-		></input>
         <input
-			type="text" 
-			placeholder="Enter Message"
-			value={ messageContent }
-			onChange={(e) => {
-				setMessageContent(e.target.value);
-			}}
-		></input>
+          type="text"
+          placeholder="Title"
+          value={messageTitle}
+          onChange={(e) => {
+            setMessageTitle(e.target.value);
+          }}
+        ></input>
+        <input
+          type="text"
+          placeholder="Enter Message"
+          value={messageContent}
+          onChange={(e) => {
+            setMessageContent(e.target.value);
+          }}
+        ></input>
         <button
-			onSubmit={async (e) => {
-				postMessage(postIDforMessage, messageContent);
-			}}
-		>Submit</button>
+          onSubmit={async (e) => {
+            postMessage(postIDforMessage, messageContent);
+          }}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

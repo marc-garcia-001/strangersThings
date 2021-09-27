@@ -85,7 +85,6 @@ const Posts = ({ messageTarget, setMessageTarget, setPostIDforMessage }) => {
       <div id="grid-container">
         {postsToDisplay.length
           ? postsToDisplay.reverse().map((post) => {
-            console.log(post)
               return (
                 <div key={post._id} className="post-card">
                   <h3>{post.title}</h3>
@@ -101,7 +100,11 @@ const Posts = ({ messageTarget, setMessageTarget, setPostIDforMessage }) => {
                       onClick={e => {
                         setMessageTarget(e.target.value);
                         setPostIDforMessage(e.target.key);
-                        history.push('/MessageForm')
+                        if (getToken()) {
+                          history.push('/MessageForm')
+                        } else {
+                          history.push('/Login')
+                        }
                       }}
                     >Message</button>
                   )}
